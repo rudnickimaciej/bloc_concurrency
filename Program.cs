@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace bloc_concurrency
 {
@@ -6,7 +7,23 @@ namespace bloc_concurrency
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var t = new Thread(() =>
+            {
+                for (int i = 0; i < 1000; i++)
+                {
+                    Console.Write("0");
+                }
+                Console.WriteLine("\nWątek się zakończył");
+            });
+
+            
+            t.Start();
+            //t.IsBackground = true;
+
+            for (int i = 0; i < 500; i++)
+            {
+                Console.Write("1");
+            }
         }
     }
 }
