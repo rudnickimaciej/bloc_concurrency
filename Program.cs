@@ -1,12 +1,33 @@
 ﻿using System;
+using System.Threading;
 
-namespace bloc_concurrency
+namespace concurrency
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
+            var t = new Thread(Function);
+            t.Start();
+
+
+
+
+            for (int i = 0; i < 100; i++)
+            {
+                Console.Write("0");
+            }
+
+            Console.ReadKey();
+        }
+
+        private static void Function()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Console.Write("1");
+            }
         }
     }
 }
